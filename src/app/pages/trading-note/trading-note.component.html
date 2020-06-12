@@ -1,0 +1,142 @@
+<div class="col-sm-12">
+    <div class="card card-user">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="card" style="margin-top:5px; margin-bottom:2px;">
+                <div class="alert alert-success alert-dismissible fade show" style="margin:10px;" *ngIf="successMessage != null">
+                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                      <i class="nc-icon nc-simple-remove"></i>
+                    </button>
+                    <span>
+                      <b>{{successMessage}}</b></span>
+                  </div>
+                
+                  <div class="alert alert-danger alert-dismissible fade show" style="margin:10px;" *ngIf="errorMessage != null">
+                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                      <i class="nc-icon nc-simple-remove"></i>
+                    </button>
+                    <span>
+                      <b> {{errorMessage}} </b></span>
+                  </div>
+                <div class="card-header">
+                    Cadastrar Nota de Negociação
+                </div>
+                <div class="form-group row" style="margin: 10px;">
+                    <div class="form-group col-sm-1" style="margin-left:10px;">
+                        <label for="op">Corretora</label>
+                        <div class="col-sm-1">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="exampleRadios1"
+                                    formControlName="broker" value="XP" checked (change)="chooseBroker($event);">
+                                <label class="form-check-label" for="exampleRadios1">
+                                    XP
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="exampleRadios2"
+                                    formControlName="broker" value="CLEAR" (change)="chooseBroker($event);">
+                                <label class="form-check-label" for="exampleRadios2">
+                                    CLEAR
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="exampleFormControlTextarea1">Codigo da Nota</label>
+                        <input class="form-control" type="number" formControlName="codeNote">
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="exampleFormControlTextarea1">Data do Pregão</label>
+                        <input class="form-control" type="date" formControlName="date">
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="exampleFormControlTextarea1">Valor da Operação</label>
+                        <input class="form-control" type="text" formControlName="value" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="exampleFormControlTextarea1">Valor Total da Venda</label>
+                        <input class="form-control" type="text" formControlName="valueSell" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+                    </div>
+                    <div class="form-group col-sm-2" *ngIf="!clearSelected">
+                        <label for="exampleFormControlTextarea1">Corretagem</label>
+                        <input class="form-control" type="text" formControlName="brokerage" currencyMask 
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="exampleFormControlTextarea1">Impostos</label>
+                        <input class="form-control" type="text" formControlName="taxes" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="exampleFormControlTextarea1">Outros</label>
+                        <input class="form-control" type="text" formControlName="otherTaxes" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="exampleFormControlTextarea1">Liquidação</label>
+                        <input class="form-control" type="text" formControlName="liquidation" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="exampleFormControlTextarea1">Emolumentos</label>
+                        <input class="form-control" type="text" formControlName="emoluments" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="exampleFormControlTextarea1">IRRF</label>
+                        <input class="form-control" type="text" formControlName="incomingTax" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+                    </div>
+                    <div class="form-group col-sm-2" style="margin-top:15px;">
+                        <button type="submit" [disabled]="!form.valid" class="btn btn-secondary btn-round">Cadastrar
+                            Nota</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="card-body all-icons">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title"> Notas de Negociação</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead class=" text-primary">
+                            <th scope="col">Corretora</th>
+                            <th scope="col">Codigo</th>
+                            <th scope="col">Pregão</th>
+                            <th scope="col">Valor da Operação</th>
+                            <th scope="col">Valor da Venda</th>
+                            <th scope="col">Liquidação</th>
+                            <th scope="col">Emolumentos</th>
+                            <th scope="col">Corretagem</th>
+                            <th scope="col">Impostos</th>
+                            <th scope="col">Outros</th>
+                            <th scope="col">Total de Impostos</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let op of notes;">
+                                <td>{{op.broker}}</td>
+                                <td>{{op.code}}</td>
+                                <td>{{op.date | date:'dd/MM/yyyy'}}</td>
+                                <td>{{op.value | currency:'BRL' }}</td>
+                                <td>{{op.valueSell | currency:'BRL'}}</td>
+                                <td>{{op.taxes.liquidation | currency:'BRL'}} </td>
+                                <td>{{op.taxes.emoluments | currency:'BRL'}}</td>
+                                <td>{{op.taxes.brokerage | currency:'BRL'}}</td>
+                                <td>{{op.taxes.taxes | currency:'BRL'}}</td>
+                                <td>{{op.taxes.otherTaxes | currency:'BRL'}}</td>
+                                <td>{{op.taxes.totalValue | currency:'BRL'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

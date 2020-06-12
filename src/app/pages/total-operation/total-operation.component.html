@@ -1,0 +1,87 @@
+<div class="card-body all-icons">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header" style="text-align: left;">
+                    <h5 class="card-title"> Buscar Totais Operacionais</h5>
+                </div>
+                <div class="form-group row" style="margin: 10px;">
+                    <div class="col-sm-2" style="margin-top:10px">
+                        <h5>Mês</h5>
+                        <select class="form-control" formControlName="month" (change)="searchOperation();">
+                            <option value="null" selected="selected">-- TODOS --</option>
+                            <option value="3" selected="selected">Março</option>
+                            <option value="4" selected="selected">Abril</option>
+                            <option value="5" selected="selected">Maio</option>
+                            <option value="6" selected="selected">Junho</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2" style="margin-top:10px">
+                        <h5>Empresa</h5>
+                        <select class="form-control" formControlName="stockName" (change)="searchOperation();">
+                            <option value="null" selected="selected">-- TODAS --</option>
+                            <option value="CVCB3" selected="selected">CVCB3</option>
+                            <option value="GUAR3" selected="selected">GUAR3</option>
+                            <option value="PETR4" selected="selected">PETR4</option>
+                            <option value="AMAR3" selected="selected">AMAR3</option>
+                            <option value="VVAR3" selected="selected">VVAR3</option>
+                            <option value="COGN3" selected="selected">COGN3</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2" style="margin-top:10px">
+                        <h5>Corretora</h5>
+                        <select class="form-control" formControlName="broker" (change)="searchOperation();">
+                            <option value="null" selected="selected">-- TODAS --</option>
+                            <option value="XP">XP</option>
+                            <option value="CLEAR">CLEAR</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="card-header">
+                    <h6 class="card-title"> Quantitativos Financeiros ({{totalOperations.length}})</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead class=" text-primary">
+                            <th>Mês</th>
+                            <th>Ação</th>
+                            <th>Quantidade Compra</th>
+                            <th>Quantidade Venda</th>
+                            <th>Valor de Compra</th>
+                            <th>Valor de Venda</th>
+                            <th>Emolumentos</th>
+                            <th>Liquidação</th>
+                            <th>Impostos</th>
+                            <th>IRRF</th>
+                            <th>Outros</th>
+                            <th>Custos Operacionais</th>
+                            <th>Lucro</th>
+                            <th>DARF</th>
+                            <th>Ultima Modificação</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let op of totalOperations; index as i;">
+                                <td>{{op.referenceMonth}}</td>
+                                <td>{{op.stockName}}</td>
+                                <td>{{op.buyQuantity}}</td>
+                                <td>{{op.sellQuantity}}</td>
+                                <td>{{op.totalPurchased | currency:'BRL'}}</td>
+                                <td>{{op.totalSold | currency:'BRL'}}</td>
+                                <td>{{op.totalEmoluments | currency:'BRL'}}</td>
+                                <td>{{op.totalLiquidation | currency:'BRL'}}</td>
+                                <td>{{op.totalTaxes | currency:'BRL'}}</td>
+                                <td>{{op.totalIncomingTax | currency:'BRL'}}</td>
+                                <td>{{op.totalOtherTaxes | currency:'BRL'}}</td>
+                                <td>{{op.totalOperationalCosts | currency:'BRL'}}</td>
+                                <td style="color: blue;">{{op.totalGainValue | currency:'BRL'}}</td>
+                                <td style="color: red;">{{op.totalDarf | currency:'BRL'}}</td>
+                                <td>{{op.lastModified | date:'dd/MM/yyyy'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

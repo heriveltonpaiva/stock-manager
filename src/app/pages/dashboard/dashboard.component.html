@@ -1,0 +1,171 @@
+<div class="row">
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-globe text-warning"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Movimentação de Compras</p>
+              <p class="card-title"> {{totalBuy | currency:'BRL'}}
+                <p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats" style="font-size:18px; color: black;">
+          <i class="fa fa-refresh"></i> Total de Ações Compradas: {{totalQuantityBuy}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-money-coins text-success"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Movimentação de Vendas</p>
+              <p class="card-title"> {{totalSold | currency:'BRL'}}
+                <p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats" style="font-size:18px; color: black;">
+          <i class="fa fa-calendar-o"></i> Total de Ações Vendidas: {{totalQuantitySold}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-money-coins"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Taxas e Custos Operacionais</p>
+              <p class="card-title"> {{totalTaxes | currency:'BRL'}}
+                <p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats" style="font-size:18px; color: black;">
+          <i class="fa fa-clock-o"></i> Operacionais: {{totalOperationalCosts | currency:'BRL'}} Taxas B3: {{b3Taxes | currency:'BRL'}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-favourite-28 text-primary"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Lucro Líquido</p>
+              <p class="card-title"> {{totalGain | currency:'BRL'}}
+                <p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats" style="font-size:18px; color: black;">
+          <i class="fa fa-refresh"></i>  Lucro Bruto: {{totalGainBrute | currency:'BRL'}} - Darf {{totalDarf | currency:'BRL'}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card ">
+      <div class="card-header ">
+        <h5 class="card-title">Evolução Patrimonial</h5>
+        <p class="card-category">12 meses</p>
+      </div>
+      <div class="card-body ">
+        <canvas id=chartHours width="400" height="50"></canvas>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats">
+          <i class="fa fa-history"></i> Atualizado há 3 minutos
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="card ">
+      <div class="card-header ">
+        <h5 class="card-title">Minha Carteira</h5>
+        <p class="card-category">Participação</p>
+      </div>
+      <div class="card-body ">
+        <canvas id="chartEmail"></canvas>
+      </div>
+      <div class="card-footer ">
+        <div class="legend">
+          <i class="fa fa-circle text-primary"></i> CVCB3
+          <i class="fa fa-circle text-warning"></i> VVAR3
+          <i class="fa fa-circle text-danger"></i> AZUL4
+          <i class="fa fa-circle text-gray"></i> AMAR3
+        </div>
+        <hr>
+        <div class="stats">
+          <i class="fa fa-calendar"></i> Total de Ações
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card card-chart">
+      <div class="card-header">
+        <h5 class="card-title">Evolução de Rentabilidade</h5>
+        <p class="card-category">Rentabilidade Diária</p>
+      </div>
+      <div class="card-body">
+        <canvas id="speedChart" width="400" height="100"></canvas>
+      </div>
+      <div class="card-footer">
+        <div class="chart-legend">
+          <i class="fa fa-circle text-info"></i> Minha Carteira
+          <i class="fa fa-circle text-warning"></i> Carteira da Corretora
+        </div>
+        <hr/>
+        <div class="card-stats">
+          <i class="fa fa-check"></i> Dados da B3
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
