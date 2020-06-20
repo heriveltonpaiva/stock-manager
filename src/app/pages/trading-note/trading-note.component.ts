@@ -4,7 +4,6 @@ import { TradingNoteService } from './trading-note.service';
 import { TaxRequest } from './request/tax-request';
 import { TradingNoteRequest } from './request/trading-note-request';
 import { TradingNote } from './response/trading-note';
-import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-trading-note',
@@ -17,14 +16,14 @@ export class TradingNoteComponent implements OnInit {
     broker: new FormControl("XP"),
     date: new FormControl(Date.now.toString),
     codeNote: new FormControl(),
-    value: new FormControl(),
-    valueSell: new FormControl(),
-    liquidation: new FormControl(),
-    emoluments: new FormControl(),
-    brokerage: new FormControl(),
-    taxes: new FormControl(),
-    incomingTax: new FormControl(),
-    otherTaxes: new FormControl(),
+    value: new FormControl(0),
+    valueSell: new FormControl(0),
+    liquidation: new FormControl(0),
+    emoluments: new FormControl(0),
+    brokerage: new FormControl(0),
+    taxes: new FormControl(0),
+    incomingTax: new FormControl(0),
+    otherTaxes: new FormControl(0),
   })
   notes; 
   successMessage;

@@ -19,14 +19,19 @@ export class OperationService {
 
   save(operation): Observable<Object> {
     const url = "http://localhost:8080"
-    console.log("Operation...")
     return this.http.post(url + '/operation/', operation, this.httpOptions)
       .pipe(retry(1), catchError(this.errorHandl));
   }
 
-  findAll(): Observable<Object> {
+  findAll(search): Observable<Object> {
     const url = "http://localhost:8080"
-    return this.http.get(url + '/operations/', this.httpOptions)
+    console.log(search);
+    return this.http.get(url + '/operations'
+    +'?broker=' + search.broker 
+    + '&referenceMonth=' + search.referenceMonth 
+    + '&stockName=' + search.stockName 
+    + '&tradingNoteCode=' + search.tradingNoteCode 
+    + '&type=' + search.typeOperation, this.httpOptions)
       .pipe(retry(1), catchError(this.errorHandl));
   }
 

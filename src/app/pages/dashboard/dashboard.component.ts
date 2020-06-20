@@ -148,7 +148,7 @@ export class DashboardComponent implements OnInit{
       this.chartEmail = new Chart(this.ctx, {
         type: 'pie',
         data: {
-          labels: [1, 2, 3],
+          labels: [1, 2, 3, 4],
           datasets: [{
             label: "Emails",
             pointRadius: 0,
@@ -160,7 +160,7 @@ export class DashboardComponent implements OnInit{
               '#ef8157'
             ],
             borderWidth: 0,
-            data: [342, 480, 530, 120]
+            data: [90, 20, 30, 10]
           }]
         },
 

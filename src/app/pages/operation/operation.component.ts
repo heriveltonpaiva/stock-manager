@@ -4,6 +4,10 @@ import { OperationRequest } from '../trading-note/request/operation-request';
 import { OperationService } from './operation.service';
 import { TradingNoteService } from '../trading-note/trading-note.service';
 import { TradingNote } from '../trading-note/response/trading-note';
+import { OperationSearchRequest } from './request/operation-search-request'
+import { sample } from 'rxjs/operators';
+import { isNull } from 'util';
+import { OperationResponse } from './response/operation-response';
 
 @Component({
   selector: 'app-operation',
@@ -30,6 +34,7 @@ export class OperationComponent implements OnInit {
   operations;
   comboTradingNote;
   noteSelected: TradingNote;
+  totalOperation;
   
   constructor(public operationService: OperationService, public tradingNoteService: TradingNoteService) { }
 
@@ -66,12 +71,33 @@ export class OperationComponent implements OnInit {
   }
 
   searchOperation(){
-    console.log(this.formSearch.value);
+    const search = new OperationSearchRequest()
+    
+    search.tradingNoteCode = isNull(this.formSearch.value['tradingNoteCode'])? "" : this.formSearch.value['tradingNoteCode'];
+    search.stockName = isNull(this.formSearch.value['stockName'])? "" : this.formSearch.value['stockName'];
+    search.referenceMonth = isNull(this.formSearch.value['month'])? "" : this.formSearch.value['month'];
+    search.typeOperation = isNull(this.formSearch.value['type'])? "" :this.formSearch.value['type']
+    search.broker = isNull(this.formSearch.value['broker']) ? "" : this.formSearch.value['broker'];
+    console.log(search);
+    this.operationService.findAll(search).subscribe(resp => {
+      this.operations = (<OperationResponse>resp).operations;
+      this.totalOperation = (<OperationResponse>resp).totalOperation;
+      console.log(resp);
+    })
   }
 
   loadList(){
-    this.operationService.findAll().subscribe(resp => {
-      this.operations = resp;
+    const search = new OperationSearchRequest()
+    search.tradingNoteCode = ""
+    search.stockName = ""
+    search.referenceMonth = "6";
+    search.typeOperation = "";
+    search.broker = "";
+
+    this.operationService.findAll(search).subscribe(resp => {
+      console.log(resp);
+      this.operations = (<OperationResponse>resp).operations;
+      this.totalOperation = (<OperationResponse>resp).totalOperation;
     })
 
     this.tradingNoteService.findAll().subscribe(resp => {
