@@ -1,4 +1,4 @@
-<div class="col-sm-12">
+<div class="col-sm-8">
     <div class="card card-user">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="card" style="margin-top:5px; margin-bottom:2px;">
@@ -99,7 +99,7 @@
 </div>
 <div class="card-body all-icons">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
                     <h6 class="card-title"> Notas de Negociação</h6>
@@ -107,8 +107,8 @@
                 <div class="card-body">
                     <table class="table">
                         <thead class=" text-primary">
-                            <th scope="col">Corretora</th>
                             <th scope="col">Codigo</th>
+                            <th scope="col">Corretora</th>
                             <th scope="col">Pregão</th>
                             <th scope="col">Valor da Operação</th>
                             <th scope="col">Valor da Venda</th>
@@ -121,17 +121,17 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let op of notes;">
-                                <td>{{op.broker}}</td>
-                                <td>{{op.code}}</td>
-                                <td>{{op.date | date:'dd/MM/yyyy'}}</td>
-                                <td>{{op.value | currency:'BRL' }}</td>
-                                <td>{{op.valueSell | currency:'BRL'}}</td>
-                                <td>{{op.taxes.liquidation | currency:'BRL'}} </td>
-                                <td>{{op.taxes.emoluments | currency:'BRL'}}</td>
-                                <td>{{op.taxes.brokerage | currency:'BRL'}}</td>
-                                <td>{{op.taxes.taxes | currency:'BRL'}}</td>
-                                <td>{{op.taxes.otherTaxes | currency:'BRL'}}</td>
-                                <td>{{op.taxes.totalValue | currency:'BRL'}}</td>
+                                <td style="width:5%;"><h5>{{op.code}}</h5></td>
+                                <td style="width:5%;"><h5>{{op.broker}}</h5></td>
+                                <td style="width:5%;"><h5>{{op.date | date:'dd/MM/yyyy'}}</h5></td>
+                                <td style="width:10%;color: blue;"><h5>{{op.value | currency:'BRL' }}</h5></td>
+                                <td style="width:10%;color:green;"><h5 *ngIf="op.valueSell > 0">{{op.valueSell | currency:'BRL'}}</h5><h5 *ngIf="op.valueSell == 0"> -- </h5></td>
+                                <td style="width:5%;"><h5>{{op.taxes.liquidation | currency:'BRL'}}</h5></td>
+                                <td style="width:5%;"><h5>{{op.taxes.emoluments | currency:'BRL'}}</h5></td>
+                                <td style="width:5%;"><h5>{{op.taxes.brokerage | currency:'BRL'}}</h5></td>
+                                <td style="width:5%;"><h5>{{op.taxes.taxes | currency:'BRL'}}</h5></td>
+                                <td style="width:5%;"><h5>{{op.taxes.otherTaxes | currency:'BRL'}}</h5></td>
+                                <td style="width:5%;color:brown;"><h5>{{op.taxes.totalValue | currency:'BRL'}}</h5></td>
                             </tr>
                         </tbody>
                     </table>

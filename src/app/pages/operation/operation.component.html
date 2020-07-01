@@ -1,4 +1,4 @@
-<div class="col-sm-12">
+<div class="col-sm-10">
     <div class="card card-user">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="card" style="margin-top:5px; margin-bottom:2px;">
@@ -107,189 +107,219 @@
     </div>
 </div>
 <form [formGroup]="formSearch">
-<div class="card-body all-icons">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header" style="text-align: center;">
-                    <h5 class="card-title"> Buscar Operações</h5>
-                </div>
-                <div class="form-group row" style="margin: 10px;">
-                    
-                    <div class="col-sm-2" style="margin-top:10px; margin-left: 150px;">
-                        <h5>Nota de Negociação</h5>
-                        <select class="form-control" formControlName="tradingNoteCode" (change)="searchOperation();">
-                            <option value="" selected="selected">-- TODAS --</option>
-                            <option *ngFor="let note of comboTradingNote;" value="{{note.code}}">
-                                {{note.date  | date:'dd/MM/yyyy'}} - {{note.broker}} - {{note.code}}</option>
-                        </select>
+    <div class="card-body all-icons">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header" style="text-align: center;">
+                        <h5 class="card-title"> Buscar Operações</h5>
                     </div>
-                    <div class="col-sm-2" style="margin-top:10px">
-                        <h5>Mês</h5>
-                        <select class="form-control" formControlName="month" (change)="searchOperation();">
-                            <option value="" selected="selected">-- TODOS --</option>
-                            <option value="3">Março</option>
-                            <option value="4">Abril</option>
-                            <option value="5">Maio</option>
-                            <option value="6">Junho</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-2" style="margin-top:10px">
-                        <h5>Empresa</h5>
-                        <select class="form-control" formControlName="stockName" (change)="searchOperation();">
-                            <option value="" selected="selected">-- TODAS --</option>
-                            <option value="CVCB3">CVCB3</option>
-                            <option value="GUAR3">GUAR3</option>
-                            <option value="PETR4">PETR3</option>
-                            <option value="PETR4">PETR4</option>
-                            <option value="AMAR3">AMAR3</option>
-                            <option value="VVAR3">VVAR3</option>
-                            <option value="COGN3">COGN3</option>
-                            <option value="BBDC3">BBDC3</option>
-                            <option value="BBDC4">BBDC4</option>
-                            <option value="ELET3">ELET3</option>
-                            <option value="EQTL3">EQTL3</option>
-                            <option value="ITUB3">ITUB3</option>
-                            <option value="MRVE3">MRVE3</option>
-                            <option value="SANB11">SANB11</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-2" style="margin-top:10px">
-                        <h5>Tipo de Operação</h5>
-                        <select class="form-control" formControlName="type" (change)="searchOperation();">
-                            <option value="" selected="selected">-- TODAS --</option>
-                            <option value="BUY">Compra</option>
-                            <option value="SELL">Venda</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-2" style="margin-top:10px">
-                        <h5>Corretora</h5>
-                        <select class="form-control" formControlName="broker" (change)="searchOperation();">
-                            <option value="" selected="selected">-- TODAS --</option>
-                            <option value="XP">XP</option>
-                            <option value="CLEAR">CLEAR</option>
-                        </select>
-                    </div>
+                    <div class="form-group row" style="margin: 10px;">
 
-                </div>
-                <div class="card-header">
-                    <h5 class="card-title"> Operações ({{operations.length}})</h5>
-                </div>
-                <div class="card-body">
-                    <table class="table">
-                        <thead class=" text-primary">
-                            <th>Nota</th>
-                            <th scope="col">Tipo</th>
-                            <th scope="col">Ação</th>
-                            <th scope="col">Quantidade</th>
-                            <th scope="col">Preço Unitário</th>
-                            <th scope="col">Preço da Operação</th>
-                            <th scope="col">Preço de Aquisição</th>
-                            <th scope="col">Preço Médio</th>
-                            <th scope="col">Lucro</th>
-                            <th scope="col">DARF</th>
-                            <th scope="col">Liquidação</th>
-                            <th scope="col">Emolumentos</th>
-                            <th scope="col">Corretagem</th>
-                            <th scope="col">Impostos</th>
-                            <th scope="col">Outros</th>
-                            <th scope="col">IRRF</th>
-                            <th scope="col">Total de Impostos</th>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let op of operations;">
-                                <td>{{op.tradingNoteCode}}</td>
-                                <td>{{op.type}}</td>
-                                <td>{{op.stockName}}</td>
-                                <td>{{op.quantity}}</td>
-                                <td>{{op.unitPrice | currency:'BRL'}}</td>
-                                <td>{{op.operationPrice | currency:'BRL'}}</td>
-                                <td>{{op.purchasePrice | currency:'BRL'}}</td>
-                                <td>{{op.averagePrice | currency:'BRL'}}</td>
-                                <td style="color: blue;" *ngIf="op.gainValue == 0"> -- </td>
-                                <td style="color: blue;" *ngIf="op.gainValue > 0">{{op.gainValue | currency:'BRL'}}</td>
-                                <td style="color: red; font-weight: bold;" *ngIf="op.gainValue < 0">{{op.gainValue | currency:'BRL'}}</td>
-                                <td style="color: red; font-weight: bold;" *ngIf="op.darf > 0">{{op.darf | currency:'BRL'}}</td>
-                                <td style="color: blue;" *ngIf="op.darf == 0"> -- </td>
-                                <td>{{op.taxes.liquidation | currency:'BRL'}} </td>
-                                <td>{{op.taxes.emoluments | currency:'BRL'}}</td>
-                                <td>{{op.taxes.brokerage | currency:'BRL'}}</td>
-                                <td>{{op.taxes.taxes | currency:'BRL'}}</td>
-                                <td>{{op.taxes.otherTaxes | currency:'BRL'}}</td>
-                                <td>{{op.taxes.incomingTax | currency:'BRL'}}</td>
-                                <td>{{op.taxes.totalValue | currency:'BRL'}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <div class="col-sm-2" style="margin-top:10px; margin-left: 150px;">
+                            <h5>Nota de Negociação</h5>
+                            <select class="form-control" formControlName="tradingNoteCode"
+                                (change)="searchOperation();">
+                                <option value="" selected="selected">-- TODAS --</option>
+                                <option *ngFor="let note of comboTradingNote;" value="{{note.code}}">
+                                    {{note.date  | date:'dd/MM/yyyy'}} - {{note.broker}} - {{note.code}}</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2" style="margin-top:10px">
+                            <h5>Mês</h5>
+                            <select class="form-control" formControlName="month" (change)="searchOperation();">
+                                <option value="" selected="selected">-- TODOS --</option>
+                                <option value="3">Março</option>
+                                <option value="4">Abril</option>
+                                <option value="5">Maio</option>
+                                <option value="6">Junho</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2" style="margin-top:10px">
+                            <h5>Empresa</h5>
+                            <select class="form-control" formControlName="stockName" (change)="searchOperation();">
+                                <option value="" selected="selected">-- TODAS --</option>
+                                <option value="CVCB3">CVCB3</option>
+                                <option value="GUAR3">GUAR3</option>
+                                <option value="PETR4">PETR3</option>
+                                <option value="PETR4">PETR4</option>
+                                <option value="AMAR3">AMAR3</option>
+                                <option value="VVAR3">VVAR3</option>
+                                <option value="COGN3">COGN3</option>
+                                <option value="BBDC3">BBDC3</option>
+                                <option value="BBDC4">BBDC4</option>
+                                <option value="ELET3">ELET3</option>
+                                <option value="EQTL3">EQTL3</option>
+                                <option value="ITUB3">ITUB3</option>
+                                <option value="MRVE3">MRVE3</option>
+                                <option value="SANB11">SANB11</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2" style="margin-top:10px">
+                            <h5>Tipo de Operação</h5>
+                            <select class="form-control" formControlName="type" (change)="searchOperation();">
+                                <option value="" selected="selected">-- TODAS --</option>
+                                <option value="BUY">Compra</option>
+                                <option value="SELL">Venda</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2" style="margin-top:10px">
+                            <h5>Corretora</h5>
+                            <select class="form-control" formControlName="broker" (change)="searchOperation();">
+                                <option value="" selected="selected">-- TODAS --</option>
+                                <option value="XP">XP</option>
+                                <option value="CLEAR">CLEAR</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="card-header">
+                        <h5 class="card-title"> Operações ({{operations.length}})</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped w-auto">
+                            <thead class=" text-primary">
+                                <th>Nota</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Ação</th>
+                                <th scope="col">Quantidade</th>
+                                <th scope="col">Preço Unitário</th>
+                                <th scope="col">Preço Médio</th>
+                                <th scope="col">Preço da Operação</th>
+                                <th scope="col">Preço de Aquisição</th>
+                                <th scope="col">Lucro</th>
+                                <th scope="col">DARF</th>
+                                <th scope="col">Liquidação</th>
+                                <th scope="col">Emolumentos</th>
+                                <th scope="col">Corretagem</th>
+                                <th scope="col">Impostos</th>
+                                <th scope="col">Outros</th>
+                                <th scope="col">IRRF</th>
+                                <th scope="col">Total de Impostos</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let op of operations;">
+                                    <td style="width:1%;">
+                                        <h5>{{op.tradingNoteCode}}</h5>
+                                    </td>
+                                    <td style="width:2%;" *ngIf="op.type == 'SELL'">
+                                        <h5>VENDA</h5>
+                                    </td>
+                                    <td style="width:2%;" *ngIf="op.type == 'BUY'">
+                                        <h5>COMPRA</h5>
+                                    </td>
+                                    <td style="width:3%;">
+                                        <h5><b>{{op.stockName}}</b></h5>
+                                    </td>
+                                    <td style="width:1%;">
+                                        <h5>{{op.quantity}}</h5>
+                                    </td>
+                                    <td style="width:3%;">
+                                        <h5>{{op.unitPrice | currency:'BRL'}}</h5>
+                                    </td>
+                                    <td style="width:3%;">
+                                        <h5>{{op.averagePrice | currency:'BRL'}}</h5>
+                                    </td>
+                                    <td style="width:3%; color: green;">
+                                        <h5>{{op.operationPrice | currency:'BRL'}}</h5>
+                                    </td>
+                                    <td style="width:3%;">
+                                        <h5>{{op.purchasePrice | currency:'BRL'}}</h5>
+                                    </td>
+                                    <td style="color: blue; width:5%;" *ngIf="op.gainValue == 0"> -- </td>
+                                    <td style="color: blue; width:5%;" *ngIf="op.gainValue > 0">
+                                        <h5><b>{{op.gainValue | currency:'BRL'}}</b></h5>
+                                    </td>
+                                    <td style="color: red; font-weight: bold; width:5%;" *ngIf="op.gainValue < 0">
+                                        <h5><b>{{op.gainValue | currency:'BRL'}}</b></h5>
+                                    </td>
+                                    <td style="color: red; font-weight: bold; width:5%;" *ngIf="op.darf != 0">
+                                        <h5><b>{{op.darf | currency:'BRL'}}</b></h5>
+                                    </td>
+                                    <td style="color: blue; width:5%;" *ngIf="op.darf == 0"> <h5> -- </h5></td>
+                                    <td style="width:1%;">
+                                        <h5>{{op.taxes.liquidation | currency:'BRL'}}</h5>
+                                    </td>
+                                    <td style="width:1%;"><h5>{{op.taxes.emoluments | currency:'BRL'}}</h5></td>
+                                    <td style="width:1%;"><h5>{{op.taxes.brokerage | currency:'BRL'}}</h5></td>
+                                    <td style="width:1%;"><h5>{{op.taxes.taxes | currency:'BRL'}}</h5></td>
+                                    <td style="width:1%;"><h5>{{op.taxes.otherTaxes | currency:'BRL'}}</h5></td>
+                                    <td style="width:1%;"><h5>{{op.taxes.incomingTax | currency:'BRL'}}</h5></td>
+                                    <td style="width:1%; color: brown;"><h5>{{op.taxes.totalValue | currency:'BRL'}}</h5></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="card" style="margin-bottom:2px;" >
-    <div class="card-header">
-        <h5>Totais</h5>
-    </div>
-
-    <div class="form-group row" style="margin: 10px;">
-        <div class="form-group col-sm-2">
-            <h4>Total de Compra <div style="font-weight: bold">{{totalOperation.buyQuantity}}
-                </div>
-            </h4>
-        </div>
-        <div class="form-group col-sm-2">
-            <h4>Total de Venda <div style="font-weight: bold">{{totalOperation.sellQuantity}}
-                </div>
-            </h4>
-        </div>
-        <div class="form-group col-sm-2">
-            <h4>Operações de Compras <div style="font-weight: bold">{{totalOperation.totalPurchased | currency:'BRL'}}
-                </div>
-            </h4>
-        </div>
-        <div class="form-group col-sm-2">
-            <h4>Lucro <div style="font-weight: bold; color: blue;">
-                    {{totalOperation.totalGainValue  | currency:'BRL'}}</div>
-            </h4>
-        </div>
-        <div class="form-group col-sm-2">
-            <h4>Total Darf <div style="font-weight: bold; color: red;">
-                    {{totalOperation.totalDarf | currency:'BRL'}}</div>
-            </h4>
-        </div>
-        <div class="form-group col-sm-2">
-            <h4>Operações de Vendas <div style="font-weight: bold; color: green;">
-                    {{totalOperation.totalSold | currency:'BRL'}}</div>
-            </h4>
+    <div class="card" style="margin-bottom:2px;">
+        <div class="card-header">
+            <h5>Totais</h5>
         </div>
 
+        <div class="form-group row" style="margin: 10px;">
+            <div class="form-group col-sm-2">
+                <h4>Total de Compra <div style="font-weight: bold">{{totalOperation.buyQuantity}}
+                    </div>
+                </h4>
+            </div>
+            <div class="form-group col-sm-2">
+                <h4>Total de Venda <div style="font-weight: bold">{{totalOperation.sellQuantity}}
+                    </div>
+                </h4>
+            </div>
+            <div class="form-group col-sm-2">
+                <h4>Operações de Compras <div style="font-weight: bold">
+                        {{totalOperation.totalPurchased | currency:'BRL'}}
+                    </div>
+                </h4>
+            </div>
+            <div class="form-group col-sm-2">
+                <h4>Lucro <div style="font-weight: bold; color: blue;">
+                        {{totalOperation.totalGainValue  | currency:'BRL'}}</div>
+                </h4>
+            </div>
+            <div class="form-group col-sm-2">
+                <h4>Total Darf <div style="font-weight: bold; color: red;">
+                        {{totalOperation.totalDarf | currency:'BRL'}}</div>
+                </h4>
+            </div>
+            <div class="form-group col-sm-2">
+                <h4>Operações de Vendas <div style="font-weight: bold; color: green;">
+                        {{totalOperation.totalSold | currency:'BRL'}}</div>
+                </h4>
+            </div>
+
+        </div>
+        <div class="form-group row" style="margin-left: 10px;">
+            <div class="form-group col-sm-3">
+                <h5>Taxas B3 <div style="color: red;">{{totalOperation.totalEmoluments | currency:'BRL'}} +
+                        {{totalOperation.totalLiquidation | currency:'BRL'}}</div>
+                </h5>
+            </div>
+            <div class="form-group col-sm-2">
+                <h5>Corretagem <div style="color: red;">{{totalOperation.totalBrokerage | currency:'BRL'}}
+                    </div>
+                </h5>
+            </div>
+            <div class="form-group col-sm-2">
+                <h5>Impostos <div style="color: red;">{{totalOperation.totalTaxes | currency:'BRL'}} +
+                        {{totalOperation.totalOtherTaxes | currency:'BRL'}}</div>
+                </h5>
+            </div>
+            <div class="form-group col-sm-2">
+                <h5>IRRF <div style="color: red;">{{totalOperation.totalIncomingTax | currency:'BRL'}}</div>
+                </h5>
+            </div>
+            <div class="form-group col-sm-2">
+                <h5>Custos Operacionais <div style="color: red;">
+                        {{totalOperation.totalOperationalCosts | currency:'BRL'}}</div>
+                </h5>
+            </div>
+        </div>
     </div>
-    <div class="form-group row" style="margin-left: 10px;">
-        <div class="form-group col-sm-3">
-            <h5>Taxas B3 <div style="color: red;">{{totalOperation.totalEmoluments | currency:'BRL'}} +
-                {{totalOperation.totalLiquidation | currency:'BRL'}}</div>
-            </h5>
-        </div>
-        <div class="form-group col-sm-2">
-            <h5>Corretagem <div style="color: red;">{{totalOperation.totalBrokerage | currency:'BRL'}}
-                </div>
-            </h5>
-        </div>
-        <div class="form-group col-sm-2">
-            <h5>Impostos <div style="color: red;">{{totalOperation.totalTaxes | currency:'BRL'}} +
-                {{totalOperation.totalOtherTaxes | currency:'BRL'}}</div>
-            </h5>
-        </div>
-        <div class="form-group col-sm-2">
-            <h5>IRRF <div style="color: red;">{{totalOperation.totalIncomingTax | currency:'BRL'}}</div>
-            </h5>
-        </div>
-        <div class="form-group col-sm-2">
-            <h5>Custos Operacionais <div style="color: red;">{{totalOperation.totalOperationalCosts | currency:'BRL'}}</div>
-            </h5>
-        </div>
-    </div>
-</div>
 
 </form>
